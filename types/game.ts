@@ -1,11 +1,10 @@
 export interface Game {
   id: string
   title: string
-  slug: string
   description: string
   thumbnail: string
   url: string
-  category: string
+  genre: string
   tags: string[]
   instructions: string
   controls: {
