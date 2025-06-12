@@ -1,4 +1,4 @@
-import type { Game } from "@/lib/types"
+import type { Game } from "@/types/games"
 import { GameCard } from "./game-card"
 import { CompactGameIcon } from "./compact-game-icon" // Added import
 import { cn } from "@/lib/utils" // Ensure cn is imported

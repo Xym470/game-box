@@ -1,7 +1,9 @@
 import { GameList } from "@/components/game/game-list"
-import { getGames } from "@/lib/data"
+import { getGames } from "@/app/api/games/index"
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants"
 import type { Metadata } from "next"
+import type { Game } from "@/types/game"
+import { CacheInitializer } from "../components/cache-initializer"
 
 export const metadata: Metadata = {
   title: `首页 | ${SITE_NAME}`,
@@ -9,26 +11,48 @@ export const metadata: Metadata = {
 }
 
 export default async function HomePage() {
-  const featuredGamesData = await getGames("featured", undefined, 6) // More items for icon view
-  const popularGamesData = await getGames("popular", undefined, 12) // More items for icon view
-  const latestGamesData = await getGames("latest", undefined, 12) // More items for icon view
+  let games: Game[] = [];
+  
+  try {
+    const response = await getGames();
+    
+    // 确保 games 是数组
+    if (Array.isArray(response)) {
+      games = response;
+    } else if (response && typeof response === 'object' && Array.isArray(response.data)) {
+      games = response.data;
+    } else {
+      console.error('获取游戏列表失败: 返回格式不是数组', response);
+    }
+  } catch (error) {
+    console.error('获取游戏列表失败:', error);
+  }
+
+  // 为不同区块使用相同的游戏数据
+  // 实际项目中应该通过不同的API获取不同类型的游戏
+  const featuredGames = games.slice(0, 8);  // 取前8个作为精选游戏
+  const popularGames = games.slice(8, 16);  // 取8-16个作为热门游戏
+  const latestGames = games.slice(16, 24);  // 取16-24个作为最新游戏
 
   return (
     <div className="space-y-12">
+      {/* 初始化缓存组件 - 将游戏数据传递给客户端组件 */}
+      <CacheInitializer initialGames={games} />
+      
       <section>
         <h1 className="text-3xl font-bold tracking-tight text-center mb-4">{SITE_NAME}</h1>
         <p className="text-lg text-muted-foreground text-center mb-8">{SITE_DESCRIPTION}</p>
         {/* 可以放一个大的 Banner 或搜索框 */}
       </section>
 
-      {featuredGamesData.data && featuredGamesData.data.length > 0 && (
-        <GameList games={featuredGamesData.data} title="✨ 精选游戏" variant="icon" />
+      {featuredGames.length > 0 && (
+        <GameList games={featuredGames} title="✨ 精选游戏" variant="icon" />
       )}
-      {popularGamesData.data && popularGamesData.data.length > 0 && (
-        <GameList games={popularGamesData.data} title="🔥 热门游戏" variant="icon" />
+      {popularGames.length > 0 && (
+        <GameList games={popularGames} title="🔥 热门游戏" variant="icon" />
       )}
-      {latestGamesData.data && latestGamesData.data.length > 0 && (
-        <GameList games={latestGamesData.data} title="🎮 最新上线" variant="icon" />
+      {latestGames.length > 0 && (
+        <GameList games={latestGames} title="🎮 最新上线" variant="icon" />
       )}
       
       {/* 站点信息展示 */}

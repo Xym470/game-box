@@ -1,36 +1,47 @@
-/** 游戏接口定义 */
-export interface Game {
-  id: string // 在 MongoDB 中通常使用 string 类型的 ObjectId
-  developerId: string | null // 同上
-  title: string
-  logo: string // 图片 URL
-  gameUrl: string // H5 游戏嵌入 URL
-  genre: string // 游戏类型/分类
-  tags?: string[] // 标签
-  open: boolean // 是否开放游玩
-  releaseDate: string // 发布日期 ISO string
-  description: string // 简短描述
-  gameIntroduction: string // 详细游戏介绍
-  howToPlay?: string // 玩法说明
-  recommendedGames?: string[] // 相关推荐游戏 ID 列表
-  // recommendedVideos: string; // 视频推荐，暂时简化
-  // downloadLink: string; // 下载链接，H5 盒子主要是在线，此项可选
-  views?: number // 浏览量/热度
-  rating?: number // 评分
+// 游戏分类定义
+export type GameCategory = {
+  id: string
+  name: string
+  slug: string
+  description?: string
 }
 
-// 返回信息规范
-export interface Result<T = unknown> {
-  code: number // 0 表示成功，其他表示失败
-  msg: string
-  data: T
-}
-
-export type GameCategory = "all" | "new" | "hot" | "recommend"
-
-export const GAME_CATEGORIES: Record<GameCategory, string> = {
-  all: "全部",
-  new: "最新",
-  hot: "热门",
-  recommend: "推荐",
-}
+// 预定义的游戏分类
+export const GAME_CATEGORIES: GameCategory[] = [
+  {
+    id: "action",
+    name: "动作游戏",
+    slug: "action",
+    description: "包含跑酷、格斗等动作元素的游戏"
+  },
+  {
+    id: "puzzle",
+    name: "益智游戏",
+    slug: "puzzle",
+    description: "需要动脑思考的智力游戏"
+  },
+  {
+    id: "casual",
+    name: "休闲游戏",
+    slug: "casual",
+    description: "简单易上手的休闲游戏"
+  },
+  {
+    id: "strategy",
+    name: "策略游戏",
+    slug: "strategy",
+    description: "需要战略思维的策略类游戏"
+  },
+  {
+    id: "sports",
+    name: "体育游戏",
+    slug: "sports",
+    description: "各类体育运动相关的游戏"
+  },
+  {
+    id: "arcade",
+    name: "街机游戏",
+    slug: "arcade",
+    description: "经典街机风格的游戏"
+  }
+] 

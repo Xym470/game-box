@@ -1,20 +1,25 @@
 export interface Game {
-  id: string
-  title: string
-  description: string
-  thumbnail: string
-  url: string
-  genre: string
-  tags: string[]
-  instructions: string
-  controls: {
-    [key: string]: string
-  }
-  width: number
-  height: number
-  createdAt: string
-  updatedAt: string
-  playCount: number
-  rating: number
-  ratingCount: number
+  id: number;           // 游戏ID
+  name: string;         // 游戏名称
+  description: string;  // 游戏描述
+  cover: string;        // 游戏封面图片URL
+  url: string;          // 游戏访问URL
+  category: string;     // 游戏分类
+  tags: string[];       // 游戏标签
+  createTime?: string;  // 创建时间
+  updateTime?: string;  // 更新时间
+  status: number;       // 游戏状态（0-下架，1-上架）
+  playCount?: number;   // 游玩次数
+  likeCount?: number;   // 点赞数
+  rating?: number;      // 评分
+  title?: string;       // 游戏标题（兼容旧数据）
+  logo?: string;        // 游戏logo（兼容旧数据）
+  gameUrl?: string;     // 游戏URL（兼容旧数据）
+  genre?: string;       // 游戏类型（兼容旧数据）
+  views?: number;       // 浏览量（兼容旧数据）
+  open?: boolean;       // 是否开放（兼容旧数据）
+  releaseDate?: string; // 发布日期（兼容旧数据）
+  gameIntroduction?: string; // 游戏介绍（兼容旧数据）
+  howToPlay?: string;   // 玩法说明（兼容旧数据）
+  recommendedGames?: string[]; // 推荐游戏（兼容旧数据）
 } 

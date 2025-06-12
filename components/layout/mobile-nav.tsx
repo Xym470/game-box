@@ -5,8 +5,9 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { SITE_NAME } from "@/lib/constants"
 
 export function MobileNav() {
   const pathname = usePathname()
@@ -30,6 +31,9 @@ export function MobileNav() {
         </Button>
       </SheetTrigger>
       <SheetContent side="left" className="w-64">
+        <SheetHeader>
+          <SheetTitle>{SITE_NAME}</SheetTitle>
+        </SheetHeader>
         <div className="flex flex-col space-y-4 py-4">
           {navLinks.map((link) => (
             <Link

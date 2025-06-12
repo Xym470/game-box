@@ -1,0 +1,21 @@
+{
+  "name": "Game Box - 免费在线小游戏",
+  "short_name": "Game Box",
+  "description": "无需下载，即刻畅玩数百款精选在线小游戏",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/placeholder.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/placeholder.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+} 

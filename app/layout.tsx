@@ -7,12 +7,12 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { AnimatedBackground } from "@/components/ui/animated-background"
-import { SITE_NAME, SITE_DESCRIPTION, BASE_URL } from "@/lib/constants"
+import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/constants"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(BASE_URL),
+  metadataBase: new URL('http://localhost:3000'),
   title: {
     default: SITE_NAME,
     template: `%s | ${SITE_NAME}`,
@@ -24,13 +24,12 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "zh_CN",
-    url: BASE_URL,
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
     siteName: SITE_NAME,
     images: [
       {
-        url: `${BASE_URL}/placeholder.svg?width=1200&height=630&query=h5+game+portal+og`, // 替换为你的 OG 图片
+        url: "/placeholder.svg?width=1200&height=630&query=h5+game+portal+og", // 替换为你的 OG 图片
         width: 1200,
         height: 630,
         alt: SITE_NAME,
@@ -41,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_NAME,
     description: SITE_DESCRIPTION,
-    images: [`${BASE_URL}/placeholder.svg?width=1200&height=630&query=h5+game+portal+twitter`], // 替换为你的 Twitter 图片
+    images: ["/placeholder.svg?width=1200&height=630&query=h5+game+portal+twitter"], // 替换为你的 Twitter 图片
     // creator: "@yourtwitterhandle",
   },
   icons: {
@@ -49,8 +48,8 @@ export const metadata: Metadata = {
     // shortcut: "/favicon-16x16.png",
     // apple: "/apple-touch-icon.png",
   },
-  manifest: `${BASE_URL}/site.webmanifest`, // 如果你创建 PWA manifest
-    generator: 'v0.dev'
+  manifest: "/site.webmanifest", // 如果你创建 PWA manifest
+  generator: 'v0.dev'
 }
 
 export const viewport: Viewport = {
